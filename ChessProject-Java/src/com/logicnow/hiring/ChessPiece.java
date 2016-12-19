@@ -5,13 +5,13 @@ package com.logicnow.hiring;/**
 /**
  * created by highl
  */
-public abstract class ChessPiece {
+abstract class ChessPiece {
 
-    protected ChessBoard chessBoard;
-    protected final PieceColor pieceColor;
-    protected Position position;
+    ChessBoard chessBoard;
+    private final PieceColor pieceColor;
+    Position position;
 
-    public ChessPiece(PieceColor pieceColor) {
+    ChessPiece(PieceColor pieceColor) {
 
         this.pieceColor = pieceColor;
 
@@ -52,7 +52,7 @@ public abstract class ChessPiece {
         return CurrentPositionAsString();
     }
 
-    protected String CurrentPositionAsString() {
+    private String CurrentPositionAsString() {
         String eol = System.lineSeparator();
         return String.format("Current X: {1}{0}Current Y: {2}{0}Piece Color: {3}", eol, position.getX(), position.getY(), pieceColor);
     }

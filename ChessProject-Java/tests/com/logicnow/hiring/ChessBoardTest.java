@@ -1,14 +1,14 @@
 package com.logicnow.hiring;
 
-import junit.framework.TestCase;
-import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static junit.framework.TestCase.assertFalse;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
-public class ChessBoardTest extends TestCase {
+public class ChessBoardTest {
 
     private ChessBoard testSubject;
 
@@ -36,7 +36,7 @@ public class ChessBoardTest extends TestCase {
     @Test
     public void testIsLegalBoardPosition_True_X_equals_5_Y_equals_5() {
         boolean isValidPosition = testSubject.IsLegalBoardPosition(new Position(5,5));
-        Assert.assertTrue(isValidPosition);
+        assertTrue(isValidPosition);
     }
 
     @Test
@@ -91,7 +91,7 @@ public class ChessBoardTest extends TestCase {
             else
             {
                 assertEquals(-1, pawn.getPosition().getX());
-                Assert.assertEquals(-1, pawn.getPosition().getY());
+                assertEquals(-1, pawn.getPosition().getY());
             }
         }
     }

@@ -1,20 +1,18 @@
 package com.logicnow.hiring;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
-
 import java.util.ArrayList;
 import java.util.List;
 
-public class ChessBoard {
+class ChessBoard {
 
     public static final int MAX_BOARD_WIDTH = 8;
     public static final int MAX_BOARD_HEIGHT = 8;
 
     private static final int PAWNLIMIT = 8;
 
-    private List<ChessPiece> piecesList = new ArrayList<>();
+    private final List<ChessPiece> piecesList = new ArrayList<>();
 
-    private ChessPiece[][] pieces;
+    private final ChessPiece[][] pieces;
 
     public ChessBoard() {
         pieces = new Pawn[MAX_BOARD_WIDTH][MAX_BOARD_HEIGHT];
@@ -36,13 +34,10 @@ public class ChessBoard {
     }
 
     public boolean IsLegalBoardPosition(Position position) {
-        if(position.getX() > MAX_BOARD_WIDTH ||
+        return !(position.getX() > MAX_BOARD_WIDTH ||
                 position.getX() < 0 ||
                 position.getY() > MAX_BOARD_HEIGHT ||
-                position.getY() < 0){
-            return false;
-        }
-        return true;
+                position.getY() < 0);
     }
 
     public void Update(ChessPiece chessPiece, Position oldPosition, Position newPosition){
