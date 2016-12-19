@@ -14,7 +14,7 @@ public class ChessBoard {
 
     private List<Pawn> piecesList = new ArrayList<>();
 
-    private Pawn[][] pieces;
+    private ChessPiece[][] pieces;
 
     public ChessBoard() {
         pieces = new Pawn[MAX_BOARD_WIDTH][MAX_BOARD_HEIGHT];
