@@ -12,7 +12,7 @@ public class ChessBoard {
 
     private static final int PAWNLIMIT = 8;
 
-    private List<Pawn> piecesList = new ArrayList<>();
+    private List<ChessPiece> piecesList = new ArrayList<>();
 
     private ChessPiece[][] pieces;
 
@@ -21,16 +21,17 @@ public class ChessBoard {
 
     }
 
-    public void Add(Pawn pawn, Position position) {
+    public void Add(ChessPiece chessPiece, Position position) {
         if(!PositonIsOccupied(position) &&
                 IsLegalBoardPosition(position) &&
-                !pieceLimitReached(pawn)) {
-            pawn.setPosition(position);
-            piecesList.add(pawn);
-            pieces[position.getX()][position.getY()] = pawn;
+                !pieceLimitReached(chessPiece)) {
+            chessPiece.setChessBoardAsObserver(this);
+            chessPiece.setPosition(position);
+            piecesList.add(chessPiece);
+            pieces[position.getX()][position.getY()] = chessPiece;
         }
         else {
-            pawn.setPosition(new Position(-1,-1));
+            chessPiece.setPosition(new Position(-1,-1));
         }
     }
 
@@ -44,8 +45,13 @@ public class ChessBoard {
         return true;
     }
 
-    private boolean pieceLimitReached(Pawn pawn){
-        long count = piecesList.stream().filter(p -> p.getPieceColor().equals(pawn.getPieceColor())).count();
+    public void Update(ChessPiece chessPiece, Position oldPosition, Position newPosition){
+        pieces[oldPosition.getX()][oldPosition.getY()] = null;
+        pieces[newPosition.getX()][newPosition.getY()] = chessPiece;
+    }
+
+    private boolean pieceLimitReached(ChessPiece chessPiece){
+        long count = piecesList.stream().filter(p -> p.getPieceColor().equals(chessPiece.getPieceColor())).count();
         return (count >= PAWNLIMIT );
     }
 

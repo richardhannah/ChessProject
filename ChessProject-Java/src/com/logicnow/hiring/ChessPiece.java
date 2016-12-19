@@ -25,11 +25,7 @@ public abstract class ChessPiece {
         this.position = position;
     }
 
-    public ChessBoard getChesssBoard() {
-        return chessBoard;
-    }
-
-    public void setChessBoard(ChessBoard chessBoard) {
+    public void setChessBoardAsObserver(ChessBoard chessBoard) {
         this.chessBoard = chessBoard;
     }
 

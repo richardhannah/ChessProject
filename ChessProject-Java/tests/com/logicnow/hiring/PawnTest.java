@@ -3,6 +3,7 @@ package com.logicnow.hiring;
 import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.internal.util.reflection.Whitebox;
 
 import static org.junit.Assert.*;
 
@@ -36,6 +37,9 @@ public class PawnTest {
         testSubject.Move(MovementType.MOVE, new Position(7, 3));
         assertEquals(6, testSubject.getPosition().getX());
         assertEquals(3, testSubject.getPosition().getY());
+        ChessPiece[][] internalPiecesArray = (ChessPiece[][]) Whitebox.getInternalState(chessBoard,"pieces");
+        assertEquals(testSubject,internalPiecesArray[6][3]);
+        assertEquals(null,internalPiecesArray[7][3]);
     }
 
     @Test
@@ -44,6 +48,9 @@ public class PawnTest {
         testSubject.Move(MovementType.MOVE, new Position(4, 3));
         assertEquals(6, testSubject.getPosition().getX());
         assertEquals(3, testSubject.getPosition().getY());
+        ChessPiece[][] internalPiecesArray = (ChessPiece[][]) Whitebox.getInternalState(chessBoard,"pieces");
+        assertEquals(testSubject,internalPiecesArray[6][3]);
+        assertEquals(null,internalPiecesArray[4][3]);
     }
 
     @Test
@@ -52,6 +59,9 @@ public class PawnTest {
         testSubject.Move(MovementType.MOVE, new Position(6, 2));
         assertEquals(6, testSubject.getPosition().getX());
         assertEquals(2, testSubject.getPosition().getY());
+        ChessPiece[][] internalPiecesArray = (ChessPiece[][]) Whitebox.getInternalState(chessBoard,"pieces");
+        assertEquals(null,internalPiecesArray[6][3]);
+        assertEquals(testSubject,internalPiecesArray[6][2]);
     }
 
 }
