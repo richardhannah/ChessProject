@@ -2,8 +2,16 @@ package com.logicnow.hiring;
 
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
+/**
+ * Implementation of ChessPiece. defines movement rules for a Pawn ChessPiece
+ */
 public class Pawn extends ChessPiece{
 
+    /**
+     * Instantiates a new Pawn.
+     *
+     * @param pieceColor the piece color
+     */
     public Pawn(PieceColor pieceColor){
         super(pieceColor);
     }
