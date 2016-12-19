@@ -78,21 +78,30 @@ public class ChessBoardTest {
     @Test
     public void testLimits_The_Number_Of_Pawns()
     {
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < 16; i++)
         {
-            Pawn pawn = new Pawn(PieceColor.BLACK);
+            Pawn pawn = null;
+            if(i %2 == 0) {
+                pawn = new Pawn(PieceColor.BLACK);
+            }
+            else {
+                pawn = new Pawn(PieceColor.WHITE);
+            }
             int row = i / ChessBoard.MAX_BOARD_WIDTH;
             testSubject.Add(pawn, new Position( 6 + row, i % ChessBoard.MAX_BOARD_WIDTH));
-            if (row < 1)
-            {
-                assertEquals(6 + row, pawn.getPosition().getX());
-                assertEquals(i % ChessBoard.MAX_BOARD_WIDTH, pawn.getPosition().getY());
-            }
-            else
-            {
-                assertEquals(-1, pawn.getPosition().getX());
-                assertEquals(-1, pawn.getPosition().getY());
-            }
+
         }
+        Pawn blackPawn = new Pawn(PieceColor.BLACK);
+        Pawn whitePawn = new Pawn(PieceColor.WHITE);
+
+        testSubject.Add(blackPawn,new Position(7,7));
+        testSubject.Add(whitePawn,new Position(6,7));
+        assertEquals(-1,blackPawn.getPosition().getX());
+        assertEquals(-1,blackPawn.getPosition().getY());
+        assertEquals(-1,whitePawn.getPosition().getX());
+        assertEquals(-1,whitePawn.getPosition().getY());
+
+
+
     }
 }
