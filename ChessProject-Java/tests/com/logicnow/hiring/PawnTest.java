@@ -63,4 +63,15 @@ public class PawnTest {
         assertEquals(testSubject,internalPiecesArray[6][2]);
     }
 
+    @Test
+    public void testPawn_Move_IlLegalCoordinates_Forward_DoesNotMove() {
+        chessBoard.Add(testSubject, new Position(6,3));
+        testSubject.Move(MovementType.MOVE, new Position(6, 0));
+        assertEquals(6, testSubject.getPosition().getX());
+        assertEquals(3, testSubject.getPosition().getY());
+        ChessPiece[][] internalPiecesArray = (ChessPiece[][]) Whitebox.getInternalState(chessBoard,"pieces");
+        assertEquals(testSubject,internalPiecesArray[6][3]);
+        assertEquals(null,internalPiecesArray[6][0]);
+    }
+
 }

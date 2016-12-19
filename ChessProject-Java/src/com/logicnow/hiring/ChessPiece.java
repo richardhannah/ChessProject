@@ -47,6 +47,7 @@ abstract class ChessPiece extends Observable {
 
     protected abstract void doMove(Position newPosition);
     protected abstract void doCapture(Position newPosition);
+    protected abstract boolean isValidMove(Position newPosition);
 
     @Override
     public String toString() {
