@@ -25,14 +25,12 @@ public class ChessBoard {
         if(!PositonIsOccupied(xCoordinate,yCoordinate) &&
                 IsLegalBoardPosition(xCoordinate,yCoordinate) &&
                 !pieceLimitReached(pawn)) {
-            pawn.setXCoordinate(xCoordinate);
-            pawn.setYCoordinate(yCoordinate);
+            pawn.setPosition(new Position(xCoordinate,yCoordinate));
             piecesList.add(pawn);
             pieces[xCoordinate][yCoordinate] = pawn;
         }
         else {
-            pawn.setXCoordinate(-1);
-            pawn.setYCoordinate(-1);
+            pawn.setPosition(new Position(-1,-1));
         }
     }
 
