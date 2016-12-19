@@ -6,8 +6,8 @@ import java.util.ArrayList;
 
 public class ChessBoard {
 
-    public static int MAX_BOARD_WIDTH = 7;
-    public static int MAX_BOARD_HEIGHT = 7;
+    public static final int MAX_BOARD_WIDTH = 8;
+    public static final int MAX_BOARD_HEIGHT = 8;
 
     private Pawn[][] pieces;
 
@@ -17,10 +17,19 @@ public class ChessBoard {
     }
 
     public void Add(Pawn pawn, int xCoordinate, int yCoordinate, PieceColor pieceColor) {
-        throw new UnsupportedOperationException("Need to implement ChessBoard.add()");
+        pawn.setXCoordinate(xCoordinate);
+        pawn.setYCoordinate(yCoordinate);
+        pieces[xCoordinate][yCoordinate] = pawn;
     }
 
     public boolean IsLegalBoardPosition(int xCoordinate, int yCoordinate) {
-        throw new UnsupportedOperationException("Need to implement ChessBoard.IsLegalBoardPosition()");
+        if(xCoordinate > MAX_BOARD_WIDTH ||
+                xCoordinate < 0 ||
+                yCoordinate > MAX_BOARD_HEIGHT ||
+                yCoordinate < 0){
+            return false;
+        }
+        return true;
     }
+
 }
