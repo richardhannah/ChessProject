@@ -21,24 +21,24 @@ public class ChessBoard {
 
     }
 
-    public void Add(Pawn pawn, int xCoordinate, int yCoordinate, PieceColor pieceColor) {
-        if(!PositonIsOccupied(xCoordinate,yCoordinate) &&
-                IsLegalBoardPosition(xCoordinate,yCoordinate) &&
+    public void Add(Pawn pawn, Position position) {
+        if(!PositonIsOccupied(position) &&
+                IsLegalBoardPosition(position) &&
                 !pieceLimitReached(pawn)) {
-            pawn.setPosition(new Position(xCoordinate,yCoordinate));
+            pawn.setPosition(position);
             piecesList.add(pawn);
-            pieces[xCoordinate][yCoordinate] = pawn;
+            pieces[position.getX()][position.getY()] = pawn;
         }
         else {
             pawn.setPosition(new Position(-1,-1));
         }
     }
 
-    public boolean IsLegalBoardPosition(int xCoordinate, int yCoordinate) {
-        if(xCoordinate > MAX_BOARD_WIDTH ||
-                xCoordinate < 0 ||
-                yCoordinate > MAX_BOARD_HEIGHT ||
-                yCoordinate < 0){
+    public boolean IsLegalBoardPosition(Position position) {
+        if(position.getX() > MAX_BOARD_WIDTH ||
+                position.getX() < 0 ||
+                position.getY() > MAX_BOARD_HEIGHT ||
+                position.getY() < 0){
             return false;
         }
         return true;
@@ -49,8 +49,8 @@ public class ChessBoard {
         return (count >= PAWNLIMIT );
     }
 
-    private boolean PositonIsOccupied(int xCoordinate, int yCoordinate){
-        return pieces[xCoordinate][yCoordinate] != null;
+    private boolean PositonIsOccupied(Position position){
+        return pieces[position.getX()][position.getY()] != null;
     }
 
 }
