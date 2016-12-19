@@ -100,8 +100,5 @@ public class ChessBoardTest {
         assertEquals(-1,blackPawn.getPosition().getY());
         assertEquals(-1,whitePawn.getPosition().getX());
         assertEquals(-1,whitePawn.getPosition().getY());
-
-
-
     }
 }

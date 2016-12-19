@@ -2,31 +2,32 @@ package com.logicnow.hiring;/**
  * Created by highl on 19/12/2016.
  */
 
+import java.util.Observable;
+import java.util.Optional;
+
 /**
  * created by highl
  */
-abstract class ChessPiece {
+abstract class ChessPiece extends Observable {
 
-    ChessBoard chessBoard;
     private final PieceColor pieceColor;
     Position position;
 
     ChessPiece(PieceColor pieceColor) {
 
         this.pieceColor = pieceColor;
-
     }
 
     public Position getPosition() {
         return position;
     }
 
-    public void setPosition(Position position) {
-        this.position = position;
-    }
+    public void setPosition(Position newPosition) {
 
-    public void setChessBoardAsObserver(ChessBoard chessBoard) {
-        this.chessBoard = chessBoard;
+        Optional<Position> oldPosition = Optional.ofNullable(position);
+        this.position = newPosition;
+        setChanged();
+        notifyObservers(oldPosition);
     }
 
     public PieceColor getPieceColor() {

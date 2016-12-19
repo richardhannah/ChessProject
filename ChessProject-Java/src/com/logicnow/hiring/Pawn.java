@@ -11,8 +11,7 @@ public class Pawn extends ChessPiece{
     @Override
     protected void doMove(Position newPosition) {
         if(newPosition.getX() == position.getX()) {
-            chessBoard.Update(this,position,newPosition);
-            this.position = newPosition;
+            setPosition(newPosition);
         }
     }
 

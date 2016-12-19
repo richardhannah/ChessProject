@@ -2,8 +2,11 @@ package com.logicnow.hiring;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
+import java.util.Optional;
 
-class ChessBoard {
+class ChessBoard implements Observer {
 
     public static final int MAX_BOARD_WIDTH = 8;
     public static final int MAX_BOARD_HEIGHT = 8;
@@ -23,10 +26,9 @@ class ChessBoard {
         if(!PositonIsOccupied(position) &&
                 IsLegalBoardPosition(position) &&
                 !pieceLimitReached(chessPiece)) {
-            chessPiece.setChessBoardAsObserver(this);
+            chessPiece.addObserver(this);
             chessPiece.setPosition(position);
             piecesList.add(chessPiece);
-            pieces[position.getX()][position.getY()] = chessPiece;
         }
         else {
             chessPiece.setPosition(new Position(-1,-1));
@@ -40,11 +42,6 @@ class ChessBoard {
                 position.getY() < 0);
     }
 
-    public void Update(ChessPiece chessPiece, Position oldPosition, Position newPosition){
-        pieces[oldPosition.getX()][oldPosition.getY()] = null;
-        pieces[newPosition.getX()][newPosition.getY()] = chessPiece;
-    }
-
     private boolean pieceLimitReached(ChessPiece chessPiece){
         long count = piecesList.stream().filter(p -> p.getPieceColor().equals(chessPiece.getPieceColor())).count();
         return (count >= PAWNLIMIT );
@@ -54,4 +51,11 @@ class ChessBoard {
         return pieces[position.getX()][position.getY()] != null;
     }
 
+    @Override
+    public void update(Observable o, Object arg) {
+        ChessPiece chessPiece = (ChessPiece) o;
+        Optional<Position> oldPosition = (Optional<Position>) arg;
+        oldPosition.ifPresent(p -> pieces[p.getX()][p.getY()] = null);
+        pieces[chessPiece.getPosition().getX()][chessPiece.getPosition().getY()] = chessPiece;
+    }
 }
